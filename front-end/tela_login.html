@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tela de Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+  <body class="bg-dark">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card ">
+            <div class="card-header">
+              Tela de Login
+            </div>
+            <div class="card-body">
+              <form id="login-form">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+                </div>
+                <div class="form-group">
+                  <label for="senha">Senha</label>
+                  <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+                  <div>
+                    <a href="link.com.br"><p>Esqueceu sua senha?</p></a>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Adiciona um evento submit ao formulário de login
+      $('#login-form').submit(function(e) {
+        e.preventDefault(); // Previne o formulário de ser enviado
+
+        // Redireciona o usuário para a nova página
+        window.location.href = 'tela_inicial.html';
+      });
+    </script>
+  </body>
+</html>

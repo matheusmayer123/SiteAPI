@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minha Página</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .my-form {
+            border: 1px solid #ddd;
+            /* Define a cor e a largura da borda */
+            padding: 10px;
+            /* Adiciona um espaço entre a borda e o conteúdo do formulário */
+        }
+    </style>
+    <script>
+
+
+
+        function enviar(nome, descricao, preco, quantidade, dataCadastro) {
+            //POST , PUT , GET, DELETE
+
+
+            const data = {
+                nome: nome,
+                dataCadastro: dataCadastro,
+                descricao: descricao,
+                preco: preco,
+                quantidade: quantidade
+            }
+
+            fetch("http://localhost:5261/categorias", {  //envia os arquivo para o backend
+                method: "POST",
+                //mode: "cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+
+
+            }).then((Response) => Response.json()) //resposta do envio
+                .then((result) => {
+                    Swal.fire(   //se der certo o cadastro no banco de dados
+                        'Sucesso',
+                        'Item cadastrado com sucesso!',
+                        'success'
+                    )
+
+                })
+                .catch((error) => {
+                    Swal.fire(  //se der errado
+                        'Erro',
+                        'Houve um erro ao salvar os dados',
+                        'error'
+                    )
+
+                })
+
+        }
+
+
+        /*para salvar dentro da função */
+        function salvar() {
+            let nome = document.getElementById("nome-produto").value
+            let descricao = document.getElementById("descricao-produto").value /*let é para criar*/
+            let preco = document.getElementById("preco-produto").value /*.value é para pegar o valor e checked para ver se esta marcado*/
+            let quantidade = document.getElementById("quantidade-produto").value
+            let dataCadastro = document.getElementById("data-vencimento").value
+
+
+            let splitDate = dataCadastro.split("-")
+            let ano = splitDate[0]
+            let mes = splitDate[1]  //spli para conseguir verificar o ano de cadastro
+            let dia = splitDate[2]
+
+            let hoje = new Date
+
+            let erros = []  //lista para inserir todos os erros
+
+            //verificando se o ano é valido
+            if (hoje.getFullYear() >=ano) {
+                erros.push("O ano tem que ser no minimo o atual!")
+            }
+
+           //console.log(erros)
+
+            //console. log(nome, descricao, preco, quantidade, dataCadastro)  //para imprimir o log e analisar na pagina
+
+            if (erros.length == 0) {  //quando a quantidade de erros na lista for 0 enviará para o back
+
+                enviar(nome, descricao, preco, quantidade, dataCadastro)
+
+
+
+            }
+            else {
+                Swal.fire(
+                    'Preencha os campos corretamente.',
+                    erros.join(" "),  //mostra os erros e nao envia para o back
+                    'error'
+                )
+
+
+            }
+
+
+            return false  //apenas para a pagina nao ser enviada
+        }
+    </script>
+</head>
+
+<body class="bg-dark">
+
+    <div class="container mt-5">
+        <div class="row justify-content-center"> <!--colocar o conteudo no centro-->
+            <div class="col-md-10"> <!--tamanho do card-->
+                <div class="card"> <!--area branca que contem os botoes-->
+                    <div class="card-header" style="text-align: center; font-size: large;"> <!--Titulo do card-->
+                        <a href="tela_inicial.html" class="btn btn-secondary float-left">Voltar</a>
+                        Cadastre um Produto
+                    </div>
+                    <form class="my-form" onsubmit="return salvar()">
+                        <!--ao clicar no botao submit ativa a function salvar()-->
+                        <div class="form-group">
+                            <label for="nome-produto">Nome do Produto</label>
+                            <input type="text" class="form-control" id="nome-produto">
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao-produto">Descrição do Produto</label>
+                            <textarea class="form-control" id="descricao-produto" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="preco-produto">Preço do Produto</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">R$</span>
+                                </div>
+                                <input type="number" class="form-control" id="preco-produto">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantidade-produto">Quantidade em Estoque</label>
+                            <input type="number" class="form-control" id="quantidade-produto">
+                        </div>
+                        <label for="data-vencimento">Data de Vencimento:</label>
+                        <div class="form-group">
+                            <input class=" w-auto-p3 " type="date" id="data-vencimento" style="width: 130px;">
+                            <button type="submit" class="btn btn-primary btn-success float-right mt-5"
+                                style="width: 140px;">+ Cadastrar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
