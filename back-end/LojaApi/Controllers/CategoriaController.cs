@@ -40,5 +40,18 @@ namespace Cat.Controllers{
             return categorias;
         }
 
+         [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromServices] DataContext context, int id)
+        {
+            var categoria = await context.Categorias.FirstOrDefaultAsync(x => x.Id == id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            context.Remove(categoria);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

@@ -3,6 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//as
+
+builder.Services.AddCors();
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -28,6 +33,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(c => {
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+});
 
 app.UseAuthorization();
 
