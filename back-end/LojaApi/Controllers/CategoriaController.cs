@@ -49,9 +49,9 @@ namespace Cat.Controllers{
                 return NotFound();
             }
 
-            context.Remove(categoria);
+            context.Categorias.Remove(categoria);
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok(categoria);
         }
     }
 }
