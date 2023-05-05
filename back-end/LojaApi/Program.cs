@@ -15,13 +15,9 @@ builder.Services.AddScoped<DataContext, DataContext>();
 
 var app = builder.Build();
 
-builder.Services.AddCors(
-    options => {options.AddPolicy("AllowLocalhost", policy => {
-        policy.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500")
-        .SetIsOriginAllowed(isOriginAllowed: _ => true)
-        .AllowAnyHeader().AllowAnyMethod();
-    });
-});
+//a
+
+
 
 
 // Configure the HTTP request pipeline.
@@ -32,8 +28,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
