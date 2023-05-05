@@ -37,15 +37,16 @@
 
             fetch("http://localhost:5261/categorias", {  //envia os arquivo para o backend
                 method: "POST",
-                //mode: "cors",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(data)
 
 
-            }).then((Response) => Response.json()) //resposta do envio
+            }).then((response) => response.json()) //resposta do envio
                 .then((result) => {
+
+                    
                     Swal.fire(   //se der certo o cadastro no banco de dados
                         'Sucesso',
                         'Item cadastrado com sucesso!',
@@ -84,13 +85,13 @@
             let erros = []  //lista para inserir todos os erros
 
             //verificando se o ano é valido
-            if (hoje.getFullYear() >=ano) {
+            if (hoje.getFullYear() > ano) {
                 erros.push("O ano tem que ser no minimo o atual!")
             }
 
-           //console.log(erros)
+           console.log(erros)
 
-            //console. log(nome, descricao, preco, quantidade, dataCadastro)  //para imprimir o log e analisar na pagina
+            console. log(nome, descricao, preco, quantidade, dataCadastro)  //para imprimir o log e analisar na pagina
 
             if (erros.length == 0) {  //quando a quantidade de erros na lista for 0 enviará para o back
 
@@ -110,7 +111,8 @@
             }
 
 
-            return false  //apenas para a pagina nao ser enviada
+           
+           return false  //apenas para a pagina nao ser enviada
         }
     </script>
 </head>

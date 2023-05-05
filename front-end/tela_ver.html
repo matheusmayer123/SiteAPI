@@ -9,25 +9,113 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
-<body class="bg-dark">
+<script>
+  function listar() {
+    fetch("http://localhost:5261/categorias", {  //envia os arquivo para o backend
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+
+    }).then((response) => response.json()) //resposta do envio
+      .then((result) => {
+        //se der certo o cadastro no banco de dados
+        renderizar(result)
+
+
+      })
+      .catch((error) => {
+        Swal.fire(  //se der errado
+          'Erro',
+          'Houve um erro ao salvar os dados',
+          'error'
+        )
+
+      })
+  }
+
+  function renderizar(categorias) {
+    let table = document.querySelector("#tabela tbody")
+    while(tabela.firstChild){
+      tabela.removeChild(tabela.firstChild)
+    }
+    
+    
+    for (let categoria of categorias) {
+
+      let linha = `
+          <tr>
+              <td>${categoria.id}</td>
+              <td>${categoria.nome}</td>
+              <td>${categoria.descricao}</td>
+              <td>${categoria.preco}</td>
+              <td>${categoria.quantidade}</td>
+              <td>${categoria.dataCadastro}</td>
+              <td>
+                  <a href="javascript: excluir(${categoria.id})">Excluir</a>
+                </td>
+              
+            
+          </tr>
+      `
+      let tr = document.createElement("tr")
+      tr.innerHTML = linha
+      tabela.appendChild(tr)
+    }
+  }
+
+  function excluir(id){
+    fetch("http://localhost:5261/categorias/" + id, {  //envia os arquivo para o backend
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+
+    }).then((response) => response.json()) //resposta do envio
+      .then((result) => {
+        
+        listar()
+
+
+      })
+      .catch((error) => {
+        Swal.fire(  //se der errado
+          'Erro',
+          'Clique novamente em excluir para deletar!',
+          'error'
+        )
+
+      })
+
+  }
+</script>
+
+<body class="bg-" onload="listar()">
   <div class="container mt-5">
     <div class="button">
       <button class="btn btn-secondary"><a href="tela_inicial.html" style="color: white;">Voltar</a></button>
       <!--botao voltar-->
     </div>
-    
-    <div class="title">
-      <h1 style="color: white; text-align: center;"><b>Estoque</b></h1>
-    </div>
-    <hr style="background-color: black;">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        
-      </div>
-    </div>
+    <table class="table table-striped" id="tabela">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome Produto</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Data-Validade</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
     <hr style="background-color: black;">
     <p style="color: white; text-align: center;">produzido por...@</p>
   </div>
