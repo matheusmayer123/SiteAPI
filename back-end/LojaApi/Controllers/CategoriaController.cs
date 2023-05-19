@@ -40,6 +40,14 @@ namespace Cat.Controllers{
             return categorias;
         }
 
+         
+         
+         
+         
+         
+         
+         
+         
          [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromServices] DataContext context, int id)
         {
