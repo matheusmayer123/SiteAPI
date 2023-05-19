@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Minha Página</title>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Cadastro de Mercadoria</title>
 
     <style>
         .my-form {
@@ -129,15 +130,15 @@
                     <form class="my-form" onsubmit="return salvar()">
                         <!--ao clicar no botao submit ativa a function salvar()-->
                         <div class="form-group">
-                            <label for="nome-produto">Nome do Produto</label>
+                            <label for="nome-produto">Nome do Produto:</label>
                             <input type="text" class="form-control" id="nome-produto">
                         </div>
                         <div class="form-group">
-                            <label for="descricao-produto">Descrição do Produto</label>
+                            <label for="descricao-produto">Descrição do Produto:</label>
                             <textarea class="form-control" id="descricao-produto" rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="preco-produto">Preço do Produto</label>
+                            <label for="preco-produto">Preço do Produto:</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
@@ -146,7 +147,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="quantidade-produto">Quantidade em Estoque</label>
+                            <label for="quantidade-produto">Quantidade em Estoque:</label>
                             <input type="number" class="form-control" id="quantidade-produto">
                         </div>
                         <label for="data-vencimento">Data de Vencimento:</label>
