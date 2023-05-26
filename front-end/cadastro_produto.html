@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Minha Página</title>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Cadastro de Mercadoria</title>
 
     <style>
         .my-form {
@@ -37,15 +38,15 @@
 
             fetch("http://localhost:5261/categorias", {  //envia os arquivo para o backend
                 method: "POST",
-                //mode: "cors",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(data)
 
 
-            }).then((Response) => Response.json()) //resposta do envio
+            }).then((response) => response.json()) //resposta do envio
                 .then((result) => {
+                    
                     Swal.fire(   //se der certo o cadastro no banco de dados
                         'Sucesso',
                         'Item cadastrado com sucesso!',
@@ -84,13 +85,13 @@
             let erros = []  //lista para inserir todos os erros
 
             //verificando se o ano é valido
-            if (hoje.getFullYear() >=ano) {
+            if (hoje.getFullYear() > ano) {
                 erros.push("O ano tem que ser no minimo o atual!")
             }
 
-           //console.log(erros)
+           console.log(erros)
 
-            //console. log(nome, descricao, preco, quantidade, dataCadastro)  //para imprimir o log e analisar na pagina
+            console. log(nome, descricao, preco, quantidade, dataCadastro)  //para imprimir o log e analisar na pagina
 
             if (erros.length == 0) {  //quando a quantidade de erros na lista for 0 enviará para o back
 
@@ -110,7 +111,8 @@
             }
 
 
-            return false  //apenas para a pagina nao ser enviada
+           
+           return false  //apenas para a pagina nao ser enviada
         }
     </script>
 </head>
@@ -128,15 +130,15 @@
                     <form class="my-form" onsubmit="return salvar()">
                         <!--ao clicar no botao submit ativa a function salvar()-->
                         <div class="form-group">
-                            <label for="nome-produto">Nome do Produto</label>
+                            <label for="nome-produto">Nome do Produto:</label>
                             <input type="text" class="form-control" id="nome-produto">
                         </div>
                         <div class="form-group">
-                            <label for="descricao-produto">Descrição do Produto</label>
+                            <label for="descricao-produto">Descrição do Produto:</label>
                             <textarea class="form-control" id="descricao-produto" rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="preco-produto">Preço do Produto</label>
+                            <label for="preco-produto">Preço do Produto:</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
@@ -145,7 +147,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="quantidade-produto">Quantidade em Estoque</label>
+                            <label for="quantidade-produto">Quantidade em Estoque:</label>
                             <input type="number" class="form-control" id="quantidade-produto">
                         </div>
                         <label for="data-vencimento">Data de Vencimento:</label>

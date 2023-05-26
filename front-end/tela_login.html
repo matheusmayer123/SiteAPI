@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Tela de login</title>
   </head>
   <body class="bg-dark">
     <div class="container mt-5">
@@ -21,13 +22,19 @@
               <form id="login-form">
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+                  <input type="email" class="form-control" id="email" placeholder="Digite seu email" onchange="validateFields()">
                 </div>
                 <div class="form-group">
                   <label for="senha">Senha</label>
                   <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
                   <div>
                     <a href="link.com.br"><p>Esqueceu sua senha?</p></a>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                    <label class="form-check-label" for="autoSizingCheck">
+                    Lembrar de mim
+                    </label>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
@@ -46,6 +53,7 @@
         // Redireciona o usuário para a nova página
         window.location.href = 'tela_inicial.html';
       });
+      
     </script>
   </body>
 </html>
