@@ -22,6 +22,26 @@
         #carouselExampleIndicators{
           padding: 3px;
         }
+
+        #sair{
+          max-width: 100px;
+          box-shadow: 0 0 0 2px black;
+          width: 80px;
+          
+        }
+
+        #cadastrar-produto{
+          box-shadow: 0 0 0 2px black;
+          font-size: 1.0rem;
+          height: 50px;
+        }
+
+        #ver-estoque{
+          box-shadow: 0 0 0 2px black;
+          font-size: 1.0rem;
+          height: 50px;
+        }
+
         
         
 
@@ -35,14 +55,14 @@
             <div class="col-md-12"> <!--largura de 50% pelo bootstrap-->
                 <div class="card col-12 w-"> <!--area branca que contem os botoes-->
                   <div class="card-header" style="text-align: center; font-size: large;"> <!--Titulo do card-->
-                        <a href="tela_login.html" class="btn btn-danger float-left">Sair</a>
+                        <a href="tela_login.html" id="sair" class="btn btn-danger float-left">Sair</a>
                         
                     </div>
                     <br>
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary mr-5"><a href="cadastro_produto.html"
+                        <button type="button" id="cadastrar-produto" class="btn btn-primary mr-5"><a href="cadastro_produto.html"
                                 style="color: white;">Cadastrar Produto</a></button>
-                        <button type="button" class="btn btn-primary float-right h-5"><a href="tela_ver.html" style="color: white;">Ver Estoque</a></button>
+                        <button type="button" id="ver-estoque" class="btn btn-primary float-right h-5"><a href="tela_ver.html" style="color: white;">Ver Estoque</a></button>
                     </div>
                     <br>
                     <br>

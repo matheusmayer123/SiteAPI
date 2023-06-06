@@ -1,59 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Tela de Login</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <title>Tela de login</title>
-  </head>
-  <body class="bg-dark">
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card ">
-            <div class="card-header">
-              Tela de Login
-            </div>
-            <div class="card-body">
-              <form id="login-form">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Digite seu email" onchange="validateFields()">
+
+<head>
+  <title>Tela de Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <title>Tela de login</title>
+</head>
+
+<body class="bg-dark">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card " style="height: 30rem;">
+          <div class="card-header" style="display: flex; justify-content: center;">
+            Tela de Login
+          </div>
+          <div class="card-body">
+            <form id="login-form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+              </div>
+              <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+              </br>
+                <div class="d-flex justify-content-between">
+                  <a href="recuperar.html">
+                    <p>Esqueceu sua senha?</p>
+                  </a>
+                  <a href="POLÍTICA DE PRIVACIDADE.pdf" target="_blank" type="application/pdf" class="float-right" style="padding-right: 3px;">
+                    <p>Privacidade e Segurança</p>
+                  </a>
                 </div>
-                <div class="form-group">
-                  <label for="senha">Senha</label>
-                  <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
-                  <div>
-                    <a href="link.com.br"><p>Esqueceu sua senha?</p></a>
-                  </div>
-                  <div class="custom-control custom-checkbox">
-                    <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                    <label class="form-check-label" for="autoSizingCheck">
+                <div class="custom-control custom-checkbox">
+                  <input class="form-check-input" type="checkbox" id="lembrar-de-mim">
+                  <label class="form-check-label" for="lembrar-de-mim">
                     Lembrar de mim
-                    </label>
-                  </div>
+                  </label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-              </form>
-            </div>
+              </div>                                                  <!--puxando função script quando for enviado o formulario-->
+              <button type="submit" class="btn btn-primary btn-block " onsubmit="validateFields()">Entrar</button>  
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      // Adiciona um evento submit ao formulário de login
-      $('#login-form').submit(function(e) {
-        e.preventDefault(); // Previne o formulário de ser enviado
+  <script>
+    // Adiciona um evento submit ao formulário de login
+    $('#login-form').submit(function (e) {
+      e.preventDefault(); // Previne o formulário de ser enviado
+      var email = document.getElementById("email").value;
+      var senha = document.getElementById("senha").value;
 
+      if (email == "admin@uniso.com" && senha == "admin") {
         // Redireciona o usuário para a nova página
         window.location.href = 'tela_inicial.html';
-      });
-      
-    </script>
-  </body>
+      }
+
+      //mensagens de erro
+      if (email != "admin@uniso.com") {
+        alert("Email incorreto!")
+      }
+      if (senha != "admin") {
+        alert("Senha incorreta!")
+      }
+
+    });
+    
+
+  </script>
+</body>
+
 </html>

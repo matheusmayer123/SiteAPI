@@ -13,6 +13,18 @@
   <title>Estoque</title>
 
 </head>
+<style>
+  #btn-voltar {
+    background-color: rgb(108, 108, 108);
+    max-width: 100px;
+    max-height: 50px;
+    box-shadow: 0 0 0 2px black;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
 
 <script>
   function listar() {
@@ -32,14 +44,54 @@
       .catch((error) => {
         Swal.fire(  //se der errado
           'Erro',
-          'Houve um erro ao salvar os dados',
+          'Houve um erro ao carregar os dados',
           'error'
         )
 
       })
   }
 
-  function excluir(id){
+  function Atualizar(id) {
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+
+      let nome = document.getElementById("nome-produto").value
+      let descricao = document.getElementById("descricao-produto").value /*let é para criar*/
+      let preco = document.getElementById("preco-produto").value /*.value é para pegar o valor e checked para ver se esta marcado*/
+      let quantidade = document.getElementById("quantidade-produto").value
+      let dataCadastro = document.getElementById("data-vencimento").value
+
+      fetch("http://localhost:5261/categorias/" + id, {  //envia os arquivo para o backend
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        }
+
+      }).then((response) => response.json()) //resposta do envio
+        .then((result) => {
+
+          listar()
+
+        })
+
+      const categoria = {
+        id: id,
+        nome: nome,
+        descricao: descricao,
+        preco: preco,
+        quantidade: quantidade,
+        dataCadastro: dataCadastro
+      };
+
+
+      Atualizar(id);
+    });
+  }
+
+
+  function excluir(id) {
     fetch("http://localhost:5261/categorias/" + id, {  //envia os arquivo para o backend
       method: "DELETE",
       headers: {
@@ -48,7 +100,7 @@
 
     }).then((response) => response.json()) //resposta do envio
       .then((result) => {
-        
+
         listar()
 
 
@@ -67,28 +119,32 @@
 
   function renderizar(categorias) {
     let tabela = document.querySelector("#tabela tbody")
-    while(tabela.firstChild){
+    while (tabela.firstChild) {
       tabela.removeChild(tabela.firstChild)
     }
-    
-    
+
+
     for (let categoria of categorias) {
 
       let linha = `
-          <tr>
-              <td>${categoria.id}</td>
-              <td>${categoria.nome}</td>
-              <td>${categoria.descricao}</td>
-              <td>${categoria.preco}</td>
-              <td>${categoria.quantidade}</td>
-              <td>${categoria.dataCadastro}</td>
-              <td>
+            <tr>
+                <td>${categoria.id}</td>
+                <td>${categoria.nome}</td>
+                <td>${categoria.descricao}</td>
+                <td>${categoria.preco}</td>
+                <td>${categoria.quantidade}</td>
+                <td>${categoria.dataCadastro}</td>
+                
+
+                <td>
+                 
                   <a class="btn btn-danger" href="javascript: excluir(${categoria.id})">Excluir</a>
-                </td>
+                    
+                  </td>
+                
               
-            
-          </tr>
-      `
+            </tr>
+        `
       let tr = document.createElement("tr")
       tr.innerHTML = linha
       tabela.appendChild(tr)
@@ -100,27 +156,28 @@
 <body class="bg-secondary" onload="listar()">
   <div class="container mt-5">
     <div class="button">
-      <button class="btn btn-primary"><a href="tela_inicial.html" style="color: white;">Voltar</a></button>
+      <button class="btn btn-primary" id="btn-voltar"><a href="tela_inicial.html"
+          style="color: white;">Voltar</a></button>
       <!--botao voltar-->
     </div>
     <hr style="background-color: black;">
-    <div class="card align-content-center" style= >
-        <table class="table table-striped" id="tabela">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Nome Produto</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Quantidade</th>
-              <th scope="col">Data-Validade</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div class="card align-content-center">
+      <table class="table table-striped" id="tabela">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome Produto</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Data-Validade</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
 
-          </tbody>
-        </table>
+        </tbody>
+      </table>
     </div>
     <hr style="background-color: black;">
     <p style="color: white; text-align: center;">produzido por @SoftwareSolutions .</p>
